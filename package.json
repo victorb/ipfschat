@@ -1,0 +1,20 @@
+{
+  "name": "ipfschat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "clear": "0.0.1",
+    "ipfs-api": "^2.5.1",
+    "mocha": "^2.3.3",
+    "ndjson": "^1.4.2",
+    "oboe": "^2.1.2",
+    "request": "^2.65.0",
+    "underscore": "^1.8.3"
+  }
+}
