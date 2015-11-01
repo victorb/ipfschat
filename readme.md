@@ -1,27 +1,12 @@
 ## IPFS-Chat
 
-Merging messages? How?
 
-```json
-[]
-```
+### To Run
 
-```json
-[
-	{
-		text: 'IPFS was created',
-		timestamp: '2015-10-1 23:21:32 GMT+2',
-		user: null
-	}
-]
-```
+have ipfs daemon running
 
-```json
-[
-	{
-		text: 'IPFS was created',
-		timestamp: '2015-10-1 23:21:32 GMT+2',
-		user: null
-	}
-]
-```
+Run `npm install`
+
+Run `node index.js read forever` to open a buffer with all the messages in the network
+
+Run `node index.js send "Hello World"` to send your first message
