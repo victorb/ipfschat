@@ -111,12 +111,9 @@ class App extends Component {
 
 ipc.on('got-messages', function(messages) {
   ReactDOM.render(<App messages={messages}/>, document.getElementById('root'))
+  ipc.send('get-messages')
 })
 ipc.send('get-messages')
-
-setInterval(function() {
-  ipc.send('get-messages')
-}, 1000 * 10)
 
 ipc.on('sent-message', function(path) {
   ipc.send('get-messages')

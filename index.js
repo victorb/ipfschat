@@ -6,7 +6,7 @@ var fs = require('fs');
 var clear = require('clear');
 var merger = require('./lib/merger')
 
-var ipfs = new ipfsApi()
+var ipfs = new ipfsApi('localhost', '5001')
 
 function ifErrThrow(err) {
 	if(err) {
@@ -119,18 +119,17 @@ function getMessages(path) {
 
 function read(options) {
 	return new Promise((resolve) => {
-    try {
-      fs.readFile('storage/messages', function (err, data) {
-        ifErrThrow(err)
-        resolve(JSON.parse(data))
-      });
-    } catch(err) {
-      console.log(err)
-			fs.writeFile('storage/messages', JSON.stringify([], null, 2), (err) => {
+		fs.readFile('storage/messages', function (err, data) {
+			if(err && err.code === 'ENOENT') {
+				fs.writeFile('storage/messages', JSON.stringify([], null, 2), (err) => {
+					ifErrThrow(err)
+					resolve([])
+				})
+			} else {
 				ifErrThrow(err)
-				resolve([])
-			})
-    }
+				resolve(JSON.parse(data))
+			}
+		});
 	})
 }
 

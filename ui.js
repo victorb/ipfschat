@@ -1,6 +1,5 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
-var fs = require('fs');
 var api = require('./index')
 
 // Report crashes to our server.
