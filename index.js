@@ -119,10 +119,18 @@ function getMessages(path) {
 
 function read(options) {
 	return new Promise((resolve) => {
-		fs.readFile('storage/messages', function (err, data) {
-			ifErrThrow(err)
-			resolve(JSON.parse(data))
-		});
+    try {
+      fs.readFile('storage/messages', function (err, data) {
+        ifErrThrow(err)
+        resolve(JSON.parse(data))
+      });
+    } catch(err) {
+      console.log(err)
+			fs.writeFile('storage/messages', JSON.stringify([], null, 2), (err) => {
+				ifErrThrow(err)
+				resolve([])
+			})
+    }
 	})
 }
 
