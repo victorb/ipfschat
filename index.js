@@ -231,6 +231,38 @@ if(process.argv[2] === "findpeers") {
 	})
 }
 
+module.exports = {
+  readLocal: () => {
+    return new Promise((resolve) => {
+      read().then(resolve);
+    })
+  },
+  read: () => {
+    return new Promise((resolve) => {
+      getIDHash()
+        .then(findPeers)
+        .then(getMessagesFromPeers)
+        .then(saveMessages)
+        .then(read)
+        .then(resolve)
+    })
+  },
+  write: (message) => {
+  return new Promise((resolve) => {
+    ipfs.id((err, res) => {
+      ifErrThrow(err)
+      var id = res.ID
+      write(id, message)
+        .then(addStorage)
+        .then(publish)
+        .then((path) => {
+          resolve(path)
+        })
+    })
+  })
+  }
+}
+
 //var peers = ['QmcHUExQEJJqYKfDdshPiFZA9Crh3B7Q465X7jh8SsDtjW']
 //
 //resolveID(peers[0]).then(getMessages).then((messages) => {
