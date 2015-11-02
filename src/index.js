@@ -28,6 +28,14 @@ class Line extends Component {
 }
 
 class Lines extends Component {
+  componentDidMount() {
+    let el = this.refs.scroller
+    el.scrollTop = el.scrollHeight;
+  }
+  componentDidUpdate() {
+    let el = this.refs.scroller
+    el.scrollTop = el.scrollHeight;
+  }
   render() {
     var lines = this.props.messages.map((message) => {
       return <Line timestamp={message.timestamp}
@@ -35,7 +43,15 @@ class Lines extends Component {
         text={message.text}
       />
     })
-    return <div>
+    const style = {
+      position: 'absolute',
+      top: '0px',
+      left: '10px',
+      right: '10px',
+      bottom: '30px',
+      overflowY: 'scroll'
+    }
+    return <div style={style} ref="scroller">
       {lines}
     </div>
   }
@@ -121,9 +137,9 @@ ipc.on('got-local-messages', function(messages) {
 ipc.send('get-messages')
 ipc.send('get-local-messages')
 
-ipc.on('sent-message', function(path) {
-  ipc.send('get-messages')
-})
+// ipc.on('sent-message', function(path) {
+//   ipc.send('get-messages')
+// })
 
 //ipc.on('asynchronous-reply', function(lines) {
 //  ReactDOM.render(<App messages={lines}/>, document.getElementById('root'))
