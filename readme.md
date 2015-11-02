@@ -3,10 +3,10 @@
 
 ### To Run
 
-have ipfs daemon running
+Have ipfs daemon running already. Otherwise do `ipfs daemon` in a different terminal
 
 Run `npm install`
 
-Run `node index.js read forever` to open a buffer with all the messages in the network
+Run `npm start`
 
-Run `node index.js send "Hello World"` to send your first message
+Watch out for errors and for bears
