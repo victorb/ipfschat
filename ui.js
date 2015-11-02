@@ -33,17 +33,30 @@ app.on('ready', function() {
   var ipc = require('ipc');
 
   ipc.on('get-messages', function(event, arg) {
-    api.readLocal().then(function(messages) {
-      event.sender.send('got-messages', messages)
-    })
+    console.log('Getting new messages...')
+    // api.readLocal().then(function(messages) {
+    //   event.sender.send('got-messages', messages)
+    //   console.log('Got local messages!')
+    // })
     api.read().then(function(messages) {
       event.sender.send('got-messages', messages)
+      console.log('Got local+remote messages!')
+    })
+  })
+
+  ipc.on('get-local-messages', function(event, arg) {
+    console.log('Getting local messages...')
+    api.readLocal().then(function(messages) {
+      event.sender.send('got-messages', messages)
+      console.log('Got local messages!')
     })
   })
 
   ipc.on('send-message', function(event, arg) {
+    console.log('Sending message...')
     api.write(arg).then(function(path) {
       event.sender.send('sent-message', path)
+      console.log('Sent message!')
     })
   })
 
