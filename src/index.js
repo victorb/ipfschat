@@ -8,10 +8,12 @@ class Line extends Component {
     const preStyle = {
       padding: 0,
       margin: 0,
-      fontSize: '12px'
+      fontSize: '12px',
+      wordWrap: 'break-word',
+      color: '#ecf0f1'
     }
     const greyStyle = {
-      color: 'lightgrey'
+      color: '#bdc3c7'
     }
     return <pre style={preStyle}>
     <span style={greyStyle}>
@@ -41,10 +43,39 @@ class Lines extends Component {
 
 class MessageSender extends Component {
   render() {
-    return <div>
+    const style = {
+      backgroundColor: '#27ae60',
+      position: 'absolute',
+      width: '100%',
+      padding: '2px',
+      bottom: '0'
+    }
+    const inputStyle = {
+      backgroundColor: '#27ae60',
+      color: 'white',
+      width: '90%',
+      height: '15px',
+      lineHeight: '15px',
+      padding: '3px',
+      border: '0px',
+      fontFamily: 'Ubuntu Mono',
+      margin: '0px',
+    }
+    const buttonStyle = {
+      backgroundColor: '#2ecc71',
+      fontFamily: 'Ubuntu Mono',
+      color: 'white',
+      width: '9%',
+      height: '21px',
+      padding: '0px',
+      lineHeight: '15px',
+      margin: '0px',
+      border: '0px',
+    }
+    return <div style={style}>
       <form action="#" onSubmit={this.props.onSend}>
-        <input value={this.props.message} onChange={this.props.onChange} placeholder="Write your message here..."></input>
-        <input type="submit" value="Send"></input>
+        <input style={inputStyle} value={this.props.message} onChange={this.props.onChange} placeholder="Write your message here..."></input>
+        <input style={buttonStyle} type="submit" value="Send"></input>
       </form>
     </div>
   }
